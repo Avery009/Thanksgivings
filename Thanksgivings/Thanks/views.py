@@ -32,9 +32,9 @@ def thanksgiving(request):
 			tgde = form.cleaned_data['thanks_description']
 			tc = '1'
 			try:
-				t = Thanks(thanks_title=tgt,thanks_date=tgd,thanks_description=tgde,thanks_count=tc)
+				t = Thanks(thanks_title=tgt,thanks_date=tgd,thanks_description=tgde,givethanks_count=tc)
 				t.save()
-				return redirect('/thanksgivings/')
+				return redirect('')
 			except Exception as e:
 				template = loader.get_template('error.html')
 				context = {
@@ -83,7 +83,7 @@ def givethanks(request, thanks_id):
 				'thanks_id' : thanks_id,
 				'thanks_title' : thanks.thanks_title,
 				'thanks_description' : thanks.thanks_description,
-				'thanks_count' : thanks.givethanks_count
+				'givethanks_count' : thanks.givethanks_count
 			}
 		except Exception:
 			context = {
@@ -107,7 +107,7 @@ def increasethanks(request, thanks_id, givethanks_count):
 			count = count + 1
 			thanks.givethanks_count = count
 			thanks.save()
-			return redirect('/thanksgivings/')
+			return redirect('')
 		except Exception as e:
 			context = {
 				'error' : str(e)
